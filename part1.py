@@ -5,9 +5,13 @@ import textwrap
 def main():
     print("Welcome to the Packet Sniffer")
     conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
+    conn.bind(('enp0s3', 0))
+    print("Socket created. Waiting for packets...")
+
 
     while True:
         raw_data, addr = conn.recvfrom(65536)
+        print("Packet received:", len(raw_data), "bytes")
         dest_mac, src_mac, eth_proto, data = ethernet_frame(raw_data)
         print('\nEthernet Frame:')
         print('Destination: {}, Source: {}, Protocol: {}'.format(dest_mac, src_mac, eth_proto))
