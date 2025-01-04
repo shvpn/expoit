@@ -4,7 +4,7 @@ import textwrap
 
 def main():
     print("Welcome to the Packet Sniffer")
-    conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
+    conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0800))
     conn.bind(('enp0s3', 0))
     print("Socket created. Waiting for packets...")
 
